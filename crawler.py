@@ -2,15 +2,19 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
 
+# 0 is today, 1 is yesterday, ...
+crawle_date = 0
+
 
 def get_papers():
-    req = requests.get('https://arxiv.org/list/cs.AI/recent?show=50')
+    # if crawle_date is big (bigger then 4 or 5) increase 'show' parameter value
+    req = requests.get('https://arxiv.org/list/cs.AI/recent?show=100')
 
     soup = BeautifulSoup(req.text, 'html.parser')
 
-    date = soup.select('h3')[0].text
+    date = soup.select('h3')[crawle_date].text
 
-    dlpage = soup.select('#dlpage > dl')[0]
+    dlpage = soup.select('#dlpage > dl')[crawle_date]
 
     paper_list = []
 
