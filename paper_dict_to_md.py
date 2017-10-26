@@ -1,6 +1,6 @@
 
-def paper_dict_to_md(papers):
-    date = papers['date']
+def paper_dict_to_md(paper_bunch):
+    date = paper_bunch['date']
     file_name = date + "-daily-DL-paper.md"
     f = open(file_name, "w")
 
@@ -16,22 +16,23 @@ def paper_dict_to_md(papers):
 
     f.write(header)
 
-    paper_list = papers['paper_list']
+    for paper_list in paper_bunch['paper_list']:
 
-    print(paper_list)
+        print(paper_list)
+        cls = paper_list['class']
+        f.write('## ' + cls + '<br>\n')
 
-    for detail in paper_list:
-        title = detail['title']
-        author = detail['author']
-        subject = detail['subject']
-        pdf = detail['pdf']
+        for papers in paper_list['papers']:
+            title = papers['title']
+            author = papers['author']
+            subject = papers['subject']
+            pdf = papers['pdf']
 
-        f.write('## ' + title + '<br>\n')
-        f.write('국문 : ' + '' + '<br>\n')
-        f.write('저자 : ' + author + '<br>\n')
-        f.write('키워드 :' + '' + '<br>\n')
-        f.write('pdf : <https://arxiv.org' + pdf + '><br>\n')
-        f.write('요약 : ' + '' + '<br>\n\n\n')
+            f.write('### ' + title + '<br>\n')
+            f.write('국문 : ' + '' + '<br>\n')
+            f.write('저자 : ' + author + '<br>\n')
+            f.write('키워드 :' + '' + '<br>\n')
+            f.write('pdf : <https://arxiv.org' + pdf + '><br>\n')
+            f.write('요약 : ' + '' + '<br>\n\n\n')
 
     f.close()
-
