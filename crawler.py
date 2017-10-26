@@ -1,13 +1,27 @@
+# Copyright kairos03. All Right Reserved.
+
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
 
-# 0 is today, 1 is yesterday, ...
-crawle_date = 0
 
+def get_papers(crawl_date):
+    """get arXiv papers
 
-def get_papers():
-    # if crawle_date is big (bigger then 4 or 5) increase 'show' parameter value
+    :param crawl_date: date index to crawling, 0 is today 1 is yesterday ...
+    :return: dict, {'date': date,
+                    'paper_list': [{
+                                    'class': short subject of paper,
+                                    'papers' : [{
+                                                'title': title,
+                                                'author': author,
+                                                'subject': long subject,
+                                                'pdf': pdf url
+                                                }]
+                                    }]
+                    }
+    """
+    # if crawl_date is big (bigger then 4 or 5) increase 'show' parameter value
     paper_list = []
     date = None
 
@@ -23,8 +37,8 @@ def get_papers():
 
         # parse
         soup = BeautifulSoup(req.text, 'html.parser')
-        date = soup.select('h3')[crawle_date].text
-        dlpage = soup.select('#dlpage > dl')[crawle_date]
+        date = soup.select('h3')[crawl_date].text
+        dlpage = soup.select('#dlpage > dl')[crawl_date]
 
         # crawl pdf link
         dt = dlpage.select('dt')

@@ -1,5 +1,15 @@
+# Copyright kairos03. All Right Reserved.
+
 
 def paper_dict_to_md(paper_bunch, header_out=True):
+    """paper dict transform to markdown
+
+    Markdown file's name is automatically created by this rule -- YYYY-MM-DD-daily-DL-paper.md
+
+    :param paper_bunch: paper information dict
+    :param header_out: if True write header
+
+    """
     date = paper_bunch['date']
     file_name = date + "-daily-DL-paper.md"
     f = open(file_name, "w")
@@ -11,7 +21,7 @@ def paper_dict_to_md(paper_bunch, header_out=True):
                  'subtitle: 오늘의 딥러닝 논문\n' \
                  'date: ' + date + '\n' \
                  'categories: Machine-learning\n' \
-                 'cover: https://user-images.githubusercontent.com/6357456/30470074-9b04e2fc-99f3-11e7-9c89-869dc06cc8f3.png\n' \
+                 'cover: https://goo.gl/5pYNGp\n' \
                  'tag:    [AI, machine-learning, deep-learning, paper, trend]\n' \
                  '---\n\n'
 
@@ -30,10 +40,10 @@ def paper_dict_to_md(paper_bunch, header_out=True):
             pdf = papers['pdf']
 
             f.write('### ' + title + '<br>\n')
-            f.write('국문 : ' + '' + '<br>\n')
+            f.write('국문 : ' + '' + '<br>\n')    # TODO auto translation
             f.write('저자 : ' + author + '<br>\n')
-            f.write('키워드 :' + '' + '<br>\n')
+            f.write('키워드 :' + '' + '<br>\n')   # TODO auto keyword extraction
             f.write('pdf : <https://arxiv.org' + pdf + '><br>\n')
-            f.write('요약 : ' + '' + '<br>\n\n\n')
+            f.write('요약 : ' + '' + '<br>\n\n\n')    # TODO auto summarize
 
     f.close()
