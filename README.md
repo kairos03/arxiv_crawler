@@ -12,7 +12,7 @@ $ python main.py
 ### crawler
 crawling arxiv page and return `papers` dict
 
-### paper_dict_to_md
+### encoder
 using `papers` dict make markdown file with jekyll header
 
 ### main
