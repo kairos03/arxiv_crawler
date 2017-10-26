@@ -1,4 +1,8 @@
 import crawler
-import paper_dict_to_md
+from encoder import paper_dict_to_md
 
-paper_dict_to_md.paper_dict_to_md(crawler.get_papers())
+# with header
+paper_dict_to_md(crawler.get_papers(), header_out=True)
+
+# without header
+paper_dict_to_md(crawler.get_papers(), header_out=False)
